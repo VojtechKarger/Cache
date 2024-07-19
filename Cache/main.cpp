@@ -31,8 +31,8 @@ void ringBufferTests() {
     
     for (auto item : buffer) std::cout << item;
     std::cout << std::endl;
-    
-    for (int i = 0; i < 6; i++) buffer.remove(0);
+        
+    buffer.eraseItems(1);
     
     for (auto item : buffer) std::cout << item;
     std::cout << std::endl;

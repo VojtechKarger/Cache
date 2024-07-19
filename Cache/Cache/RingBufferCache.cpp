@@ -3,6 +3,16 @@
 #include <optional>
 
 std::optional<Cache::Content> RingBufferCache::item(const Key & key) {
+   
+    for (auto & buffer : buffers) {
+        size_t invalidCnt = 0;
+        for (const auto & item : buffer) {
+            if (item.isValid()) break;
+            invalidCnt++;
+        }
+        buffer.eraseItems(invalidCnt);
+    }
+    
     
     // this solution does not scale very well
     // to make it more scalable we can take advantage from multithreading
@@ -54,6 +64,6 @@ void RingBufferCache::setItem(const Content & response, const Key &key) {
     buffers.push_back(buffer);
 }
 
-bool RingBufferCache::Item::isValid() {
+bool RingBufferCache::Item::isValid() const {
     return std::time(nullptr) < timestamp;
 }

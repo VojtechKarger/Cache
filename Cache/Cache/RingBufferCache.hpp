@@ -21,7 +21,7 @@ class RingBufferCache: public Cache {
         Content content;
         std::time_t timestamp; 
         
-        bool isValid();
+        bool isValid() const;
     };
     
     typedef RingBuffer<Item, capacity> Buffer;

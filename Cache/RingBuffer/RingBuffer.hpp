@@ -22,6 +22,11 @@ public:
     T & first() {
         return data[startIndex];
     }
+   
+    void eraseItems(size_t cnt) {
+        startIndex = (startIndex + cnt) % Capacity;
+        size -= cnt;
+    }
     
     bool isEmpty() const {
         return size == 0;
