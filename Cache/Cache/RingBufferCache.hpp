@@ -3,17 +3,33 @@
 #include "../RingBuffer/RingBuffer.hpp"
 #include "../HttpResponse.h"
 #include "Cache.h"
-#include <stdio.h>
 #include <vector>
 #include <string>
 #include <optional>
+#include <time.h>
 
 constexpr size_t capacity = 10;
+constexpr time_t cashableTimeInterval = 100;
 
 class RingBufferCache: public Cache {
-    typedef RingBuffer<std::pair<Key, Content>, capacity> Buffer;
+    
+    struct Item {
+        Item() = default;
+        Item(Key key, Content content, std::time_t timestamp) : key(key), content(content), timestamp(timestamp) {}
+        
+        Key key;
+        Content content;
+        std::time_t timestamp; 
+        
+        bool isValid();
+    };
+    
+    typedef RingBuffer<Item, capacity> Buffer;
     
 public:
+   
+    RingBufferCache() = default;
+    ~RingBufferCache() override = default;
     
     std::optional<Content> item(const Key & key) override;
     void setItem(const Content & item, const Key & key) override;

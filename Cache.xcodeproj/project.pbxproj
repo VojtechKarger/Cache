@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8590A7DC2C42B4F200BC72B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8590A7DB2C42B4F200BC72B4 /* main.cpp */; };
+		8590A7E82C42CA5500BC72B4 /* RingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8590A7E62C42CA5500BC72B4 /* RingBuffer.cpp */; };
+		85C0AA902C47AC19007D43FE /* RingBufferCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85C0AA8F2C47AC19007D43FE /* RingBufferCache.cpp */; };
+		85C0AA972C48653F007D43FE /* RequestHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85C0AA952C48653F007D43FE /* RequestHandler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,17 @@
 /* Begin PBXFileReference section */
 		8590A7D82C42B4F200BC72B4 /* Cache */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Cache; sourceTree = BUILT_PRODUCTS_DIR; };
 		8590A7DB2C42B4F200BC72B4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8590A7E62C42CA5500BC72B4 /* RingBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RingBuffer.cpp; sourceTree = "<group>"; };
+		8590A7E72C42CA5500BC72B4 /* RingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RingBuffer.hpp; sourceTree = "<group>"; };
+		8590A7EC2C42DB1500BC72B4 /* HttpResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpResponse.h; sourceTree = "<group>"; };
+		8590A7F02C43106300BC72B4 /* HttpRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
+		85C0AA8E2C47AC12007D43FE /* RingBufferCache.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RingBufferCache.hpp; sourceTree = "<group>"; };
+		85C0AA8F2C47AC19007D43FE /* RingBufferCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RingBufferCache.cpp; sourceTree = "<group>"; };
+		85C0AA912C47AE66007D43FE /* Cache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
+		85C0AA942C480E93007D43FE /* RequestSender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestSender.h; sourceTree = "<group>"; };
+		85C0AA952C48653F007D43FE /* RequestHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RequestHandler.cpp; sourceTree = "<group>"; };
+		85C0AA962C48653F007D43FE /* RequestHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RequestHandler.hpp; sourceTree = "<group>"; };
+		85C0AA982C48668B007D43FE /* ResponseSender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResponseSender.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +72,33 @@
 			isa = PBXGroup;
 			children = (
 				8590A7DB2C42B4F200BC72B4 /* main.cpp */,
+				8590A7F02C43106300BC72B4 /* HttpRequest.h */,
+				8590A7EC2C42DB1500BC72B4 /* HttpResponse.h */,
+				85C0AA942C480E93007D43FE /* RequestSender.h */,
+				85C0AA982C48668B007D43FE /* ResponseSender.h */,
+				85C0AA962C48653F007D43FE /* RequestHandler.hpp */,
+				85C0AA952C48653F007D43FE /* RequestHandler.cpp */,
+				85C0AA922C47AE71007D43FE /* Cache */,
+				8590A7EE2C430DAA00BC72B4 /* RingBuffer */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		8590A7EE2C430DAA00BC72B4 /* RingBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				8590A7E72C42CA5500BC72B4 /* RingBuffer.hpp */,
+				8590A7E62C42CA5500BC72B4 /* RingBuffer.cpp */,
+			);
+			path = RingBuffer;
+			sourceTree = "<group>";
+		};
+		85C0AA922C47AE71007D43FE /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				85C0AA912C47AE66007D43FE /* Cache.h */,
+				85C0AA8E2C47AC12007D43FE /* RingBufferCache.hpp */,
+				85C0AA8F2C47AC19007D43FE /* RingBufferCache.cpp */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -119,7 +160,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C0AA902C47AC19007D43FE /* RingBufferCache.cpp in Sources */,
 				8590A7DC2C42B4F200BC72B4 /* main.cpp in Sources */,
+				85C0AA972C48653F007D43FE /* RequestHandler.cpp in Sources */,
+				8590A7E82C42CA5500BC72B4 /* RingBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

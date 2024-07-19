@@ -1,4 +1,4 @@
-#include "TemplateCache.hpp"
+#include "RingBufferCache.hpp"
 #include "../HttpResponse.h"
 #include <optional>
 
@@ -9,7 +9,7 @@ std::optional<Cache::Content> RingBufferCache::item(const Key & key) {
     // keep buffer size small and search through many of them at the same time
     for (auto & buffer : buffers) {
         for (const auto & item : buffer) {
-            if (key == item.first) return std::make_optional(item.second);
+            if (key == item.key) return std::make_optional(item.content);
         }
     }
     
@@ -21,8 +21,7 @@ void RingBufferCache::remove(const Key & key) {
     for (auto & buffer : buffers) {
         for (auto it = buffer.begin(); it != buffer.end(); ++it) {
             
-            
-            if ((*it).first == key) {
+            if ((*it).key == key) {
                 buffer.remove(it);
                 return;
             }
@@ -33,12 +32,28 @@ void RingBufferCache::remove(const Key & key) {
 void RingBufferCache::setItem(const Content & response, const Key &key) {
     
     if (item(key) != std::nullopt) return;
+    Item newItem = Item(key, response, std::time(nullptr) + cashableTimeInterval);
     
+    // if there is space in the buffer or the last element is invalid add
+    // the new element to that buffer if not than continue to the next buffer
     for (auto & buffer : buffers) {
-        if (buffer.add(std::make_pair(key, response))) return;
+        if (buffer.add(newItem)) return;
+        if (buffer.isEmpty()) continue;
+        
+        Item & lastItem = buffer.first();
+        if (lastItem.isValid()) continue;
+        
+        lastItem = newItem;
+        buffer.rotate();
+        return;
     }
     
+    // if all the buffers have valid elements and are full then create new buffer
     Buffer buffer;
-    buffer.add(std::make_pair(key, response));
+    buffer.add(newItem);
     buffers.push_back(buffer);
+}
+
+bool RingBufferCache::Item::isValid() {
+    return std::time(nullptr) < timestamp;
 }
